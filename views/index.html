@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Abby's Cafe Bun &amp; Bean — Dapodi's Finest Artisan Cafe</title>
+<meta name="description" content="Abby's Cafe Bun & Bean — Good vibes, amazing food, sweetest owner. Specialty coffee, gourmet buns, and continental cuisine in Dapodi, Pune. 4.9★ Google Reviews.">
+<link href="/css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Source+Serif+4:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script id="tailwind-config">
+tailwind.config = {darkMode: "class",theme: {extend: {"colors": {"on-secondary-fixed": "#2b160f", "surface-bright": "#fff8f6", "on-tertiary": "#ffffff", "secondary": "#75584d", "on-secondary-container": "#795c51", "surface-container-low": "#faf2f0", "surface-tint": "#745853", "on-primary-container": "#ae8d87", "olive-accent": "#689F38", "inverse-on-surface": "#f7efee", "surface-container-highest": "#e8e1df", "on-surface": "#1e1b1a", "primary": "#271310", "error-container": "#ffdad6", "on-primary-fixed-variant": "#5b403c", "surface-container-high": "#eee6e5", "primary-fixed-dim": "#e3beb8", "on-error": "#ffffff", "outline": "#827472", "espresso": "#2C1810", "on-tertiary-fixed": "#0b1f1a", "primary-container": "#3e2723", "on-surface-variant": "#504442", "secondary-container": "#fed7ca", "primary-fixed": "#ffdad4", "surface-container-lowest": "#ffffff", "secondary-fixed-dim": "#e4beb2", "tertiary-fixed-dim": "#b5ccc3", "warm-wood": "#D7CCC8", "tertiary-fixed": "#d0e8de", "tertiary-container": "#1d312b", "on-primary-fixed": "#2b1613", "error": "#ba1a1a", "outline-variant": "#d3c3c0", "on-background": "#1e1b1a", "inverse-surface": "#33302f", "cream-bg": "#FBF9F5", "secondary-fixed": "#ffdbce", "on-primary": "#ffffff", "on-secondary-fixed-variant": "#5b4137", "surface-container": "#f4eceb", "on-error-container": "#93000a", "sage-accent": "#7986CB", "surface": "#fff8f6", "surface-variant": "#e8e1df", "inverse-primary": "#e3beb8", "surface-dim": "#e0d8d7", "on-tertiary-fixed-variant": "#364b44", "on-secondary": "#ffffff", "on-tertiary-container": "#839991", "tertiary": "#081c17", "background": "#fff8f6"}, "borderRadius": {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"}, "spacing": {"space-xl": "2.5rem", "space-sm": "0.5rem", "space-md": "1rem", "gutter": "1.5rem", "margin": "2rem", "space-xs": "0.25rem", "space-lg": "1.5rem"}, "fontFamily": {"label-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["\"Source Serif 4\""], "body-md": ["Plus Jakarta Sans"], "headline-sm": ["\"Source Serif 4\""], "headline-md": ["\"Source Serif 4\""], "body-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-xl": ["\"Source Serif 4\""]}, "fontSize": {"label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}], "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}], "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}], "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}], "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}], "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}], "headline-xl": ["40px", {"lineHeight": "48px", "fontWeight": "600"}]}}}};
+</script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+
+<header class="fixed top-0 w-full z-50 bg-gradient-to-b from-black/80 via-black/40 to-transparent backdrop-blur-[2px] transition-all">
+<div class="h-20 max-w-7xl mx-auto px-gutter flex items-center justify-between">
+<div class="flex items-center gap-space-md cursor-pointer" onclick="navigateTo('home')">
+<div class="h-9 w-9 rounded-full bg-cover bg-no-repeat inline-block shadow-md border border-white/30" style="background-image: url('assets/hero_image.jpg'); background-position: 80% 75%; background-size: 500%;"></div>
+<span class="text-headline-sm font-headline-sm tracking-tight text-white drop-shadow-md">Abby's Cafe Bun &amp; Bean</span>
+</div>
+<nav id="desktopNav" class="hidden md:flex items-center gap-2 bg-black/30 p-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-lg">
+<a class="nav-link transition-all cursor-pointer text-white/80 hover:text-white px-4 py-1.5 rounded-full text-body-md" data-page="home" onclick="navigateTo('home')">Home</a>
+<a class="nav-link transition-all cursor-pointer text-white/80 hover:text-white px-4 py-1.5 rounded-full text-body-md" data-page="our-menu" onclick="navigateTo('our-menu')">Our Menu</a>
+<a class="nav-link transition-all cursor-pointer text-white/80 hover:text-white px-4 py-1.5 rounded-full text-body-md" data-page="about" onclick="navigateTo('about')">About</a>
+<a class="nav-link transition-all cursor-pointer text-white/80 hover:text-white px-4 py-1.5 rounded-full text-body-md" data-page="contact-and-location" onclick="navigateTo('contact-and-location')">Contact &amp; Location</a>
+</nav>
+<div class="flex items-center gap-space-md">
+<button id="authBtn" onclick="openAuthModal('login')" class="hidden md:flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-body-md transition-all cursor-pointer shadow-md">
+<span class="material-symbols-outlined text-white text-[18px]">login</span> Sign In
+</button>
+<button id="userMenuBtn" onclick="toggleUserMenu()" class="hidden items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-body-md transition-all cursor-pointer shadow-md relative">
+<span class="material-symbols-outlined text-white text-[18px]">person</span> <span id="navUserName">User</span>
+<div id="userMenuDropdown" class="absolute top-12 right-0 bg-surface rounded-xl shadow-lg border border-outline-variant/20 py-2 w-56 hidden flex-col z-50 overflow-hidden">
+  <div class="px-4 py-3 border-b border-outline-variant/20">
+    <p class="text-label-md text-primary font-medium" id="dropdownUserName">User</p>
+    <p class="text-body-sm text-on-surface-variant truncate" id="dropdownUserEmail">user@email.com</p>
+  </div>
+  <a class="px-4 py-2.5 text-body-md text-primary hover:bg-surface-container-low text-left flex items-center gap-3 cursor-pointer transition-colors" onclick="openMyOrders()">
+    <span class="material-symbols-outlined text-[20px] text-secondary">receipt_long</span> My Orders
+  </a>
+  <a class="px-4 py-2.5 text-body-md text-primary hover:bg-surface-container-low text-left flex items-center gap-3 cursor-pointer transition-colors" onclick="switchAccount()">
+    <span class="material-symbols-outlined text-[20px] text-secondary">switch_account</span> Switch Account
+  </a>
+  <div class="h-px bg-outline-variant/20 my-1"></div>
+  <a class="px-4 py-2.5 text-body-md text-error hover:bg-error-container/30 text-left flex items-center gap-3 cursor-pointer transition-colors" onclick="handleLogout()">
+    <span class="material-symbols-outlined text-[20px]">logout</span> Sign Out
+  </a>
+</div>
+</button>
+<!-- Mobile hamburger -->
+<button class="md:hidden w-10 h-10 flex items-center justify-center rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white transition-colors" onclick="toggleMobileMenu()" id="hamburgerBtn">
+<span class="material-symbols-outlined text-white text-[24px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-menu-panel" id="mobilePanel">
+<button class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container transition-colors" onclick="toggleMobileMenu()">
+<span class="material-symbols-outlined text-primary text-[24px]">close</span>
+</button>
+<a class="mobile-nav-link" data-page="home" onclick="navigateTo('home'); toggleMobileMenu();">Home</a>
+<a class="mobile-nav-link" data-page="our-menu" onclick="navigateTo('our-menu'); toggleMobileMenu();">Our Menu</a>
+<a class="mobile-nav-link" data-page="about" onclick="navigateTo('about'); toggleMobileMenu();">About</a>
+<a class="mobile-nav-link" data-page="contact-and-location" onclick="navigateTo('contact-and-location'); toggleMobileMenu();">Contact &amp; Location</a>
+<div class="h-px bg-outline-variant/30 my-2 mx-4"></div>
+<a id="mobileAuthBtn" class="mobile-nav-link text-primary font-medium flex items-center gap-2" onclick="openAuthModal('login'); toggleMobileMenu();">
+  <span class="material-symbols-outlined">login</span> Sign In
+</a>
+<a id="mobileLogoutBtn" class="mobile-nav-link text-error font-medium flex items-center gap-2 hidden" onclick="handleLogout(); toggleMobileMenu();">
+  <span class="material-symbols-outlined">logout</span> Sign Out
+</a>
+</div>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main class="w-full pt-20 bg-surface">
+
+<!-- ==================== PAGE: HOME ==================== -->
+<div id="page-home" class="page-section active flex-col w-full">
+<!-- Hero Section -->
+<section class="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-primary text-on-primary -mt-20 pt-20">
+<div class="absolute inset-0 z-0 opacity-60 bg-cover bg-center" style="background-image: url('assets/hero_image.jpg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-transparent z-10"></div>
+<div class="relative z-20 max-w-5xl mx-auto px-gutter py-20 text-center flex flex-col items-center">
+<span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface/10 backdrop-blur-md text-surface-bright text-label-md mb-6 border border-surface/20">
+<span class="material-symbols-outlined text-[16px]">coffee</span>
+Dapodi's Finest Artisan Cafe
+</span>
+<h1 class="text-headline-xl md:text-6xl font-headline-xl tracking-tight text-surface-bright mb-6 max-w-4xl">
+Good vibes, amazing food and the sweetest owner and staff!
+</h1>
+<p class="text-body-lg text-warm-wood max-w-2xl mb-10 font-body-lg">
+Step into your neighborhood haven for freshly brewed specialty coffee, handcrafted gourmet buns, and a warm atmosphere designed for deep conversations or productive work sessions.
+</p>
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+<a class="w-full sm:w-auto px-8 py-4 rounded-full bg-surface text-primary font-label-md hover:bg-surface-bright transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer" onclick="navigateTo('our-menu')">
+<span>Explore Menu</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-full bg-transparent text-surface border border-surface/40 hover:bg-surface/10 font-label-md transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="navigateTo('contact-and-location')">
+<span>Order Online</span>
+<span class="material-symbols-outlined text-[18px]">local_mall</span>
+</a>
+</div>
+<div class="grid grid-cols-3 gap-8 mt-16 pt-12 border-t border-surface/10 w-full max-w-3xl text-center">
+<div>
+<div class="text-headline-md font-headline-md text-surface-bright">4.9/5</div>
+<div class="text-body-sm text-warm-wood mt-1">Google Reviews (256+ votes)</div>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-surface-bright">4.0 / 4.4</div>
+<div class="text-body-sm text-warm-wood mt-1">Zomato &amp; Swiggy Rating</div>
+</div>
+<div>
+<div class="text-headline-md font-headline-md text-surface-bright">100%</div>
+<div class="text-body-sm text-warm-wood mt-1">Artisanal Freshness</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Featured Specialties -->
+<section class="w-full py-24 bg-surface px-gutter" id="menu">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+<div>
+<span class="text-label-md text-secondary uppercase tracking-widest block mb-2">Handcrafted Daily</span>
+<h2 class="text-headline-lg font-headline-lg text-primary">Featured Specialties</h2>
+</div>
+<p class="text-body-md text-on-surface-variant max-w-md mt-4 md:mt-0">
+Prepared from scratch with locally sourced ingredients, premium cheeses, and freshly roasted single-origin beans.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Item 1 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-md transition-all hover:shadow-xl flex flex-col">
+<div class="h-64 w-full bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDeG2i3bmNCHnuqJfvXdQp2wrhbeqDnJpEloMYguqffp47TvGT54ITRnqcQRHqZFyBrZ1jFLJzxjbaipzwXH_RlGR4DKSAsHNT0XtMTUu0B6nZ46xUWhPWWnMCJDOU2EAmZx8FQzC83U6K_PxkHcUjLIXyCNvu-XObIT_idnsSpYIphE1AfwXKIYXqutwLA7L5dgb49_YrieUwfxpxGPAjjhm0qpB9M6c27SVkVuASpoMibfmTecV3QNg')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-olive-accent text-on-tertiary text-label-sm">Best Seller</span>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-headline-sm font-headline-sm text-primary">Penne Alfredo</h3>
+<span class="text-headline-sm font-headline-sm text-secondary">₹380</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6 flex-grow">
+Rich, velvety cream sauce tossed with penne pasta, garlic, cracked black pepper, and aged parmesan cheese. Served with artisanal garlic bread.
+</p>
+<button class="w-full py-3 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span>Add to Order</span>
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-md transition-all hover:shadow-xl flex flex-col">
+<div class="h-64 w-full bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDEZZOfKUPr5_hrgDcKudCnYqXnYJBSnRJIrQK4FQN3SLsJtLeeACXslgEX3kWbDfuJPiNcTLOzWi-BJt19Z6xtHGwCqyoLct2SrXt98R49Teoq0SEdV_lMR4RxNmcRB9tx_Le-pegZWRBMN6UnwAp1emUnp0RtedP_VR9Jd_ZXnplQ8yPa5ibjSchHW6F3iZHWHrVL7YxphFeOzzp1PE3pZKrf2ILW89zrTDSciPdynA3edPrneGU4Uw')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-secondary text-on-secondary text-label-sm">Chef's Special</span>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-headline-sm font-headline-sm text-primary">Signature Veg Burger</h3>
+<span class="text-headline-sm font-headline-sm text-secondary">₹260</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6 flex-grow">
+Hand-pressed artisan vegetable and bean patty layered with crisp iceberg lettuce, vine tomatoes, melted cheddar, and our secret signature house spread in a toasted brioche bun.
+</p>
+<button class="w-full py-3 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span>Add to Order</span>
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-md transition-all hover:shadow-xl flex flex-col">
+<div class="h-64 w-full bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIShy1EwdbnYfxsn8a30rIUMiWegguh78QbSHJ697DAN5eruXV4gEPu5wkurWO5rhQYt2cPXc2sfdIw88QyQ1UEtAzFOFdSxqEgCxes-sANC09059_0Zz2kuifars7b6IFwOXIvtZ_TAh-LboB1wpM9MKjXkl6BZYh8cASoZC0glLdf-eSaD4LJsvx8CD2nIZ-VfXQ7u9SKjwqOJ_Y5UKlLE-V0J26bEPhKksciudmKa1AaC04zVApAQ')">
+<span class="absolute top-4 left-4 px-3 py-1 rounded-full bg-sage-accent text-on-tertiary text-label-sm">Refreshing</span>
+</div>
+<div class="p-8 flex flex-col flex-grow">
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-headline-sm font-headline-sm text-primary">Lemon Iced Tea</h3>
+<span class="text-headline-sm font-headline-sm text-secondary">₹200</span>
+</div>
+<p class="text-body-md text-on-surface-variant mb-6 flex-grow">
+Brewed daily using premium Ceylon tea leaves, fresh squeezed Sicilian lemons, and hand-picked mint leaves over crystal clear ice. Perfectly balanced and deeply refreshing.
+</p>
+<button class="w-full py-3 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+<span>Add to Order</span>
+<span class="material-symbols-outlined text-[16px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ambiance Showcase -->
+<section class="w-full py-24 bg-surface-container-low px-gutter">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="text-label-md text-secondary uppercase tracking-widest block mb-2">Your Neighborhood Haven</span>
+<h2 class="text-headline-lg font-headline-lg text-primary mb-6">Designed for Focus, Crafted for Comfort</h2>
+<p class="text-body-lg text-on-surface-variant mb-6">
+Whether you need a serene corner with reliable high-speed Wi-Fi to power through your workday, or a cozy booth to catch up with old friends over artisanal pastries, Abby's Cafe Bun &amp; Bean is your home away from home.
+</p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3 text-body-md text-on-surface">
+<span class="material-symbols-outlined text-olive-accent">check_circle</span>
+<span>Plentiful power outlets and high-speed Wi-Fi for remote professionals</span>
+</li>
+<li class="flex items-center gap-3 text-body-md text-on-surface">
+<span class="material-symbols-outlined text-olive-accent">check_circle</span>
+<span>Calming ambient playlist and abundant natural sunlight</span>
+</li>
+<li class="flex items-center gap-3 text-body-md text-on-surface">
+<span class="material-symbols-outlined text-olive-accent">check_circle</span>
+<span>Warm, welcoming staff dedicated to making your day brighter</span>
+</li>
+</ul>
+<a class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-on-primary font-label-md hover:bg-primary-container transition-all cursor-pointer" onclick="navigateTo('contact-and-location')">
+<span>Plan Your Visit</span>
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+</a>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<div class="h-64 rounded-xl bg-cover bg-center shadow-md" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAeoFR2j9BB1c_Rv2G5Jmn1limENd26S2E2V6Lnlz_xBvMGeacYyG62_WA8v6LQnwSViZaFD6a8J7KtU21irL_h2siF_pcGGMeIjP4RcgZqH6aplMqwNPR0vACC1cWE9JBSdD07eIYt9j4LikL5EbRvehL7FvkRj9LFsm-jQldnveZ0E4wVDGugm3V3fPMj5MUvlg3EZ4rQNJcqPOQcfxvjQ0F0OI6zi-1sWMpBNQzqNZ-9oXc_h7HzBKI4CofPnvyxci4');"></div>
+<div class="h-40 rounded-xl bg-cover bg-center shadow-md" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCROeos2bHCQkzUOJjEL7L0AbPbR_BVrYYJanjQ1kPWAJHgExBInrMuXZsMdZ4iMTUvSgdluOTepId-ZZDAO93NJp-Ad7BWWZ9qA7XbSfJrimJ7VUkcE9CyYVi2Fr_7t_0QI5yM5ygBzG5rILriwCsgNsAcPz7L96fh3EUprSY-ztHKre7sXdLeUudyYy2WInVfqiAY8ckWG2WPrLN3t4N3Hs2yfzYbZRW3mjg1pzY9wQwO7APKDIi8iw')"></div>
+</div>
+<div class="space-y-4 pt-8">
+<div class="h-40 rounded-xl bg-cover bg-center shadow-md" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCEyMkRnhtPrPN-ESRz46SU_4Ke1KlLBXnsMJSwfIfzUpPEovgSAZnSWXbb7mBoZSp3-aZ33oJDbsPEodZVIItELVN0EjqiIG7j6I1SnY3DNVdrcWMMB0njcRfpYhe90UL4hDNnJQUU77pMC_Q-vjMLsp1U9GI2PDteyr0Ha8P3sdYEiA6qynuusBCZ1tRITHynpczY735ycvUayLSqi0dJkH1b5czDygQPEVvlTusuDeODPKuyieLn_A')"></div>
+<div class="h-64 rounded-xl bg-cover bg-center shadow-md" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBq1HE7kxn39QewvkLKvRq7rcFNetcPosjkFXaNZs735fgtjkWxfwTOy12Rki9a7CpKP8K_WZPL0SeCjx27RXaMQs-QgF0tN4dicRmb3wrfXnn6ALfftqdy12xBDtkFp5Hym3Ac8DJWEU1aTjmiUwZiTBJTomapnpSK0DHj0iCLkGvmz9_e_NjbaDHCTJ8Xf9eAgKbgy9uTchahcAbkQ-0b8Rahpucs3y507_KJr1ZrsREgCQQJdByUwA')"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Live Reviews Section -->
+<section class="w-full py-24 bg-surface px-gutter">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="text-label-md text-secondary uppercase tracking-widest block mb-2">Loved by Dapodi</span>
+<h2 class="text-headline-lg font-headline-lg text-primary mb-4">What Our Patrons Say</h2>
+<p class="text-body-md text-on-surface-variant">
+We pride ourselves on genuine hospitality and exceptional culinary standards. Here is what guests across platforms have to say about their experience.
+</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Review 1 -->
+<div class="bg-surface-container-low p-8 rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-olive-accent mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-6 italic">
+"Absolute gem in Dapodi! The owner is the sweetest person ever and makes you feel right at home. Their Signature Veg Burger and iced tea are unmatched."
+</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<div>
+<h4 class="text-label-md font-label-md text-primary">Priya Sharma</h4>
+<span class="text-body-sm text-on-surface-variant">Google Local Guide</span>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-primary-container text-on-primary-container">4.9 / 5</span>
+</div>
+</div>
+<!-- Review 2 -->
+<div class="bg-surface-container-low p-8 rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-olive-accent mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-6 italic">
+"Great place to work remotely. Calm vibe, amazing Penne Alfredo, and excellent coffee. The staff is always attentive with a warm smile."
+</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<div>
+<h4 class="text-label-md font-label-md text-primary">Rohan Kulkarni</h4>
+<span class="text-body-sm text-on-surface-variant">Zomato Reviewer</span>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-primary-container text-on-primary-container">4.0 / 5</span>
+</div>
+</div>
+<!-- Review 3 -->
+<div class="bg-surface-container-low p-8 rounded-xl shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-olive-accent mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md text-on-surface mb-6 italic">
+"Ordered via Swiggy and food arrived piping hot and neatly packed. The flavors are authentic and portions are very generous. Highly recommended!"
+</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-outline-variant/20">
+<div>
+<h4 class="text-label-md font-label-md text-primary">Ananya Deshmukh</h4>
+<span class="text-body-sm text-on-surface-variant">Swiggy Foodie</span>
+</div>
+<span class="text-xs px-2.5 py-1 rounded-full bg-primary-container text-on-primary-container">4.4 / 5</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="w-full py-24 bg-primary text-on-primary px-gutter relative overflow-hidden" id="order">
+<div class="absolute inset-0 opacity-10 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuATt2OMT64ZIjcBj0hl3uPrmPp8PfvBNyju53SSlUC2eyZLAWHJch6K2Dy-6WdwmGNPUTvdM3uYYPd2hYAAD8kPyQJjwhlwoDXgzXNhQq5SVKHtChfAwIxv9wtbbjq0MVPZI78ewYx3q22qfULVOHirA7wgQRYgt7pVBIjxTUiPvGE6rREzVX9fqUxhHscq9SooT89C5YADadLRiC1TH7anMESZvLkM53vDd1_v4Y3by4mAfzcVMSYnCw')"></div>
+<div class="relative z-10 max-w-4xl mx-auto text-center">
+<span class="text-label-md text-warm-wood uppercase tracking-widest block mb-3">Ready to Experience Abby's?</span>
+<h2 class="text-headline-xl font-headline-xl text-surface-bright mb-6">Drop By for a Cup or Order Right to Your Door</h2>
+<p class="text-body-lg text-warm-wood mb-10 max-w-2xl mx-auto">
+Reserve a table for your next meeting or order your favorite gourmet buns and brews online instantly.
+</p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto px-8 py-4 rounded-full bg-surface text-primary font-label-md hover:bg-surface-bright transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer" onclick="navigateTo('contact-and-location')">
+<span class="material-symbols-outlined text-[18px]">table_restaurant</span>
+<span>Reserve a Table</span>
+</a>
+<a class="w-full sm:w-auto px-8 py-4 rounded-full bg-secondary text-on-secondary font-label-md hover:bg-secondary/80 transition-all flex items-center justify-center gap-2 cursor-pointer" href="#">
+<span class="material-symbols-outlined text-[18px]">delivery_dining</span>
+<span>Order on Swiggy / Zomato</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ==================== PAGE: OUR MENU ==================== -->
+<div id="page-our-menu" class="page-section flex-col w-full">
+<!-- Hero intro banner -->
+<section class="relative w-full py-16 px-gutter md:px-margin bg-surface-container-low overflow-hidden">
+<div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-xl relative z-10">
+<div class="max-w-2xl">
+<span class="text-label-md uppercase tracking-widest text-secondary mb-space-xs block font-label-md">Artisanal &amp; Fresh</span>
+<h1 class="text-headline-xl font-headline-xl text-primary mb-space-md">Our Curated Menu</h1>
+<p class="text-body-lg text-on-surface-variant">Every brew is meticulously crafted from sustainably sourced beans, and every bun is baked fresh daily in our Dapodi kitchen. Explore our signature offerings.</p>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-sm bg-surface p-space-sm rounded-full shadow-sm">
+<span class="material-symbols-outlined text-secondary px-space-xs">schedule</span>
+<span class="text-body-md font-medium text-primary pr-space-sm">Open Today: 8:00 AM – 10:00 PM</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Category Navigation Bar -->
+<div class="sticky top-20 z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant/20 shadow-sm">
+<div class="max-w-7xl mx-auto px-gutter md:px-margin py-space-md flex items-center gap-space-md overflow-x-auto no-scrollbar">
+<a class="menu-cat-link px-space-md py-space-sm rounded-full bg-primary-container text-on-primary-container text-label-md whitespace-nowrap transition-all hover:scale-105" href="#coffee" onclick="scrollToMenuSection('coffee', this)">Coffee &amp; Beverages</a>
+<a class="menu-cat-link px-space-md py-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-label-md whitespace-nowrap transition-all hover:scale-105" href="#burgers" onclick="scrollToMenuSection('burgers', this)">Signature Burgers</a>
+<a class="menu-cat-link px-space-md py-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-label-md whitespace-nowrap transition-all hover:scale-105" href="#continental" onclick="scrollToMenuSection('continental', this)">Continental &amp; Pasta</a>
+<a class="menu-cat-link px-space-md py-space-sm rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface text-label-md whitespace-nowrap transition-all hover:scale-105" href="#bakery" onclick="scrollToMenuSection('bakery', this)">Bakery &amp; Buns</a>
+</div>
+</div>
+<!-- Main Menu Content -->
+<div id="menu-container" class="max-w-7xl mx-auto px-gutter md:px-margin py-space-xl flex flex-col gap-16">
+  <div class="flex justify-center items-center py-24">
+    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== PAGE: ABOUT ==================== -->
+<div id="page-about" class="page-section flex-col w-full bg-surface text-on-surface">
+<!-- Hero -->
+<section class="w-full px-gutter max-w-7xl mx-auto pt-space-xl pb-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="inline-flex items-center gap-space-xs bg-primary-container text-on-primary-container px-space-md py-space-xs rounded-full w-fit">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="text-label-sm uppercase tracking-wider">Our Story in Dapodi</span>
+</div>
+<h1 class="font-headline-xl text-primary tracking-tight">Where Freshly Brewed Coffee Meets Heartfelt Hospitality</h1>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+Nestled in the vibrant heart of Dapodi, Pune, Abby's Cafe Bun &amp; Bean wasn't just built to serve coffee—it was crafted as a haven. Founded by Abby with a simple dream of pairing artisanal, buttery buns with transcendent single-origin brews, our cafe has grown into the neighborhood's favorite living room.
+</p>
+<div class="flex items-center gap-space-lg pt-space-sm">
+<div class="flex flex-col">
+<span class="font-headline-md text-primary">4.9 / 5</span>
+<span class="text-body-sm text-on-surface-variant">Over 1,200+ Local Reviews</span>
+</div>
+<div class="w-[1px] h-10 bg-outline-variant/50"></div>
+<div class="flex flex-col">
+<span class="font-headline-md text-primary">100%</span>
+<span class="text-body-sm text-on-surface-variant">Fresh, Artisanal Ingredients</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="absolute -inset-4 bg-secondary-container/40 rounded-3xl blur-xl -z-10"></div>
+<div class="w-full h-[420px] rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(62,39,35,0.08)] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAln3RuqS8SI8bS8gbQs0PrJOKZ5lVGZPTRhW-KUTmcjOkhYAuzBWGpeZqYRVnvWcuYZz4NBjqFO4_JxPtn2Uc3n_kv2OnQMYA-dwW0myZveIxrHFx1LS810z__hWzl5efw1orkpzy4PvE-wm7-XVvwrkpcjjuQy16SS6kvhO12-MuPvOThSY3rixpf1AKRc4ewuLzw2b6KdQtc0mYFzyBEPAfHuwSkm62wdBspEnJ44Ka44-Af_oX3RA')"></div>
+</div>
+</div>
+</section>
+<!-- Meet Abby -->
+<section class="w-full bg-surface-container-low py-space-xl my-space-xl">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="w-full h-[380px] rounded-2xl overflow-hidden shadow-[0_10px_30px_rgba(62,39,35,0.06)] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAokvi9OysDBdACRkpFdgTYpJkhVM5sjS8yd_VYt8lSl-KoO0jli92ySaunXF4ftIN9ovB7A_8-3pg4VdFyzb4ewiYrcU7-soVJ1zl36uXVITqWmip9FGk9yodFLQKD9KLcJB6Qy2dLZFO0iT-jNUYb51hBIcGkn6F4wR6gsw01RpHF_-h_QjvkH59mNQI3vxtP1fcvTPzctnmm5TF5W8fWkn9WZ_qNvrdzruYJEEBhq8cbImGkqpK4Jg')"></div>
+</div>
+<div class="lg:col-span-7 order-1 lg:order-2 flex flex-col gap-space-md">
+<span class="text-label-md text-secondary uppercase tracking-widest font-semibold">The Heart Behind The Counter</span>
+<h2 class="font-headline-lg text-primary">Meet Abby &amp; The Sweetest Staff in Pune</h2>
+<p class="text-body-lg text-on-surface-variant">
+Ask any regular what makes Abby's special, and they won't just mention the signature cold brew or the melt-in-your-mouth brioche buns. They'll talk about Abby's infectious smile and our baristas who remember your order before you even speak.
+</p>
+<blockquote class="p-space-lg bg-surface rounded-xl shadow-[0_4px_20px_rgba(62,39,35,0.04)] relative">
+<span class="material-symbols-outlined text-secondary/30 text-4xl absolute top-3 left-3">format_quote</span>
+<p class="font-headline-sm text-primary italic pl-space-lg">"We wanted a place where time slows down just a little bit. Whether you're rushing to a morning meeting or unwinding after a long day, you're family here."</p>
+<span class="block mt-space-sm text-label-md text-secondary font-medium pl-space-lg">— Abby, Founder &amp; Head Host</span>
+</blockquote>
+</div>
+</div>
+</section>
+<!-- Atmosphere Cards -->
+<section class="w-full max-w-7xl mx-auto px-gutter py-space-xl">
+<div class="text-center max-w-2xl mx-auto mb-space-xl flex flex-col gap-space-sm">
+<span class="text-label-md text-secondary uppercase tracking-widest">Designed For Your Rhythm</span>
+<h2 class="font-headline-lg text-primary">An Atmosphere Crafted for Every Mood</h2>
+<p class="text-body-md text-on-surface-variant">Whether you are powering through a project, catching up with old friends, or seeking quiet solitude with a book, our spaces adapt to you.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-[0_6px_24px_rgba(62,39,35,0.04)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined">laptop_mac</span>
+</div>
+<h3 class="font-headline-sm text-primary mb-space-sm">Work Sessions</h3>
+<p class="text-body-md text-on-surface-variant">High-speed Wi-Fi, easily accessible power plugs, well-lit corner desks, and endless cups of focused espresso keep your productivity flowing effortlessly.</p>
+</div>
+<div class="mt-space-lg pt-space-md flex items-center gap-space-xs text-primary font-medium text-label-md">
+<span>Quiet Zones Available</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-[0_6px_24px_rgba(62,39,35,0.04)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container text-on-secondary-fixed flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<h3 class="font-headline-sm text-primary mb-space-sm">Casual Meet-ups</h3>
+<p class="text-body-md text-on-surface-variant">Plush lounge seating, communal wooden tables, and a cheerful ambient buzz make it the ultimate weekend spot for laughter, stories, and shared plates.</p>
+</div>
+<div class="mt-space-lg pt-space-md flex items-center gap-space-xs text-primary font-medium text-label-md">
+<span>Group Tables Ready</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-[0_6px_24px_rgba(62,39,35,0.04)] flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined">coffee</span>
+</div>
+<h3 class="font-headline-sm text-primary mb-space-sm">Solo Coffee Breaks</h3>
+<p class="text-body-md text-on-surface-variant">Grab a window seat facing the green Dapodi streets, open your favorite novel, and savor the rich aroma of hand-poured single origin coffee in absolute peace.</p>
+</div>
+<div class="mt-space-lg pt-space-md flex items-center gap-space-xs text-primary font-medium text-label-md">
+<span>Window Bar Seating</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Continental Quality -->
+<section class="w-full bg-surface-container-high/50 py-space-xl my-space-xl">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<div class="inline-flex items-center gap-space-xs bg-olive-accent/15 text-olive-accent px-space-md py-space-xs rounded-full w-fit">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span class="text-label-sm uppercase tracking-wider font-medium">Farm to Table Integrity</span>
+</div>
+<h2 class="font-headline-lg text-primary">Fresh, Authentic Continental Cuisine</h2>
+<p class="text-body-lg text-on-surface-variant">
+We believe great food starts with uncompromising ingredients. From hand-kneaded artisanal burger buns baked fresh every morning to farm-fresh vegetables and imported cheeses, every dish on our continental menu is a celebration of authentic flavors.
+</p>
+<div class="grid grid-cols-2 gap-space-md pt-space-sm">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-olive-accent mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md text-on-surface font-medium">Locally Sourced Produce</span>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-olive-accent mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md text-on-surface font-medium">Bespoke Bean Roasts</span>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-olive-accent mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md text-on-surface font-medium">Zero Artificial Preservatives</span>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-olive-accent mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="text-body-md text-on-surface font-medium">Daily Baked Brioche Buns</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6 grid grid-cols-2 gap-space-md">
+<div class="w-full h-64 rounded-2xl overflow-hidden shadow-[0_8px_20px_rgba(62,39,35,0.06)] bg-cover bg-center mt-space-xl" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBPJphto36x0BY83HHMx4NyB7_SjWbyn74adPb4QxEv8frSNghjCITu-kl2tXdzX1vMeFeaaPwTof_u0TVYTlykw3ZOV-p1tA-Xkx7k10ZzAaByWfl7fKtaWqQCx6uTyiB01RCUXIFiNxd059QzOITC-_hVyNtvn0xPl6_OgbyYcBxhH9t_VgOL4iHn356N0jAztXvnYy8ibcGquj4n9vQWo8r2oNTm-qCneqjTILyPRFEssXYkCk0I3A')"></div>
+<div class="w-full h-64 rounded-2xl overflow-hidden shadow-[0_8px_20px_rgba(62,39,35,0.06)] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJ4_3bRiNvv1F8bUY1s_rKR8Zlnp9QBxnRcPm_l1zAtTlqMZF2o0DVuAHuAkrpcJTFW8FPOpE1O7dusluND4HTArdLcmh_vp3ayHW5_t4M4J0VvkLQoEWNvgk73dsCJ5a22F_3s99w1xsmw0ivFifHtsE3nXuQ4QgXX3CPX6-d1s4hWZbMWgcF5yGbUAR85bbPxDqEofstyF9FlSwyDI1hpitDpj9-YOum7ywFD72v8ShEsCme8IaMqQ')"></div>
+</div>
+</div>
+</section>
+<!-- Why 4.9 Stars -->
+<section class="w-full max-w-7xl mx-auto px-gutter py-space-xl">
+<div class="bg-primary-container text-on-primary-container rounded-3xl p-space-xl relative overflow-hidden shadow-[0_12px_40px_rgba(39,19,16,0.15)]">
+<div class="absolute -right-10 -bottom-10 w-80 h-80 bg-secondary/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="flex items-center gap-1 text-amber-400">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<h2 class="font-headline-lg text-surface-bright">Why Pune Locals Rate Us 4.9 / 5 Stars</h2>
+<p class="text-body-lg text-on-primary-container/90 leading-relaxed">
+Consistency, warmth, and an unwavering commitment to flavor are what keep our guests coming back. From remote workers finding their favorite sanctuary to families celebrating weekend milestones, Abby's is built on genuine community love.
+</p>
+<div class="pt-space-sm">
+<a class="inline-flex items-center gap-space-sm bg-surface text-primary px-space-lg py-space-md rounded-full font-medium hover:bg-surface-bright transition-colors cursor-pointer" onclick="navigateTo('our-menu')">
+<span>Explore Our Menu</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div class="bg-primary p-space-lg rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<p class="text-body-md text-surface-bright/90 italic mb-space-md">"The absolute best cold brew in Dapodi! The vibe is so cozy and Abby makes you feel like an old friend from day one."</p>
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-label-sm">R</div>
+<div>
+<span class="block text-label-sm text-surface-bright">Rahul Deshmukh</span>
+<span class="block text-body-sm text-on-primary-container">Local Guide (48 Reviews)</span>
+</div>
+</div>
+</div>
+<div class="bg-primary p-space-lg rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] flex flex-col justify-between">
+<p class="text-body-md text-surface-bright/90 italic mb-space-md">"My go-to spot for remote work. Incredible burgers, reliable Wi-Fi, and the staff is genuinely the sweetest in Pune!"</p>
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-label-sm">P</div>
+<div>
+<span class="block text-label-sm text-surface-bright">Priya Kulkarni</span>
+<span class="block text-body-sm text-on-primary-container">Design Consultant</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Location Invite -->
+<section class="w-full max-w-7xl mx-auto px-gutter pb-space-xl pt-space-md">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-6 flex flex-col gap-space-md">
+<span class="text-label-md text-secondary uppercase tracking-widest">Drop By Today</span>
+<h2 class="font-headline-lg text-primary">Your Table is Waiting in Dapodi</h2>
+<p class="text-body-lg text-on-surface-variant">
+Come experience the aroma of freshly ground beans and warm buns for yourself. Whether you need a morning boost or a quiet evening retreat, Abby and the team are ready to welcome you with open arms.
+</p>
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-md text-on-surface">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span class="text-body-md">Dapodi, Pune, Maharashtra 411012</span>
+</div>
+<div class="flex items-center gap-space-md text-on-surface">
+<span class="material-symbols-outlined text-secondary">schedule</span>
+<span class="text-body-md">Mon–Fri: 8:00 AM – 10:00 PM | Sat–Sun: 9:00 AM – 11:00 PM</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-6">
+<div class="w-full h-[320px] rounded-2xl overflow-hidden shadow-[0_8px_24px_rgba(62,39,35,0.08)] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZJurd-JQpnTdfMlG5fShnI5kNGmkffquz2H99Nz-PIZWqb8hLLNBhtYCiT-CA52ANS-s3sCy430mNmx7FOHckhF7XRmyzgYQu5QOZhkGidMC_QSCKF4gnGzdzJk3tNBKwkWA9DE5qwknZ9Y7_12GQZ3ch7mbBd5bEL4_t1FkjPo9Y2-RO_Y_tYNM1RRHpWipX5McNNfKZLLuNqHUoIVjgFrjlcVTcw0gNYbYQLvD-7Hx--OgKpRNdDQ')"></div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- ==================== PAGE: CONTACT & LOCATION ==================== -->
+<div id="page-contact-and-location" class="page-section flex-col w-full bg-surface text-on-surface">
+<!-- Hero -->
+<section class="relative w-full py-space-xl px-gutter max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-xl overflow-hidden">
+<div class="absolute -right-20 -top-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col max-w-2xl z-10">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="px-space-md py-space-xs rounded-full bg-primary-container text-on-primary-container text-label-sm uppercase tracking-wider">Visit Us</span>
+<span class="inline-flex items-center gap-space-xs text-olive-accent text-label-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-olive-accent animate-pulse"></span> Open Daily until 11 PM
+</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-primary mb-space-md tracking-tight">Come find your cozy corner at Abby's</h1>
+<p class="text-body-lg text-on-surface-variant mb-space-lg">Whether you're looking for a quiet morning brew, an artisanal bun, or a spacious spot to work and catch up, we're waiting for you in Dapodi.</p>
+<div class="bg-surface-container-low p-space-md rounded-xl shadow-[0_4px_20px_rgba(62,39,35,0.06)] flex flex-wrap items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<span class="text-label-sm text-on-surface-variant block uppercase tracking-wider">Live Vibe Status</span>
+<span class="text-headline-sm text-primary font-headline-sm">Not too busy right now</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-body-sm text-on-surface-variant bg-surface px-space-md py-space-sm rounded-lg">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Avg. visit: 45m – 4h</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 z-10">
+<div class="relative rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(62,39,35,0.12)] bg-surface-container aspect-[4/3]">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5ngSxOVSADr89zave8iWqrM1FPNHTJzGt8Fyo5LQ1SdoEuJOYi_6l6t6kC3xLSuQ1DCDJexDWw1GvbTh47gzx0ZeT0ShDxvX_i8pI5yksLFXiOc0kgbdhJ1iLMqfj3fG8NKTGwGnWJnYH-tZoAZh6HnKuLpN4KlVb6GVZjZX2CCiljSCb5Jjl4GLGdxNUC44o7fjEFnrZyDcJ9a1y9NiiF-NK4LBL7Js_4WYpaNcl-VrD8ZW3g4YiDw')"></div>
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-primary/80 via-primary/30 to-transparent p-space-lg text-surface-bright">
+<span class="text-label-sm tracking-wider uppercase opacity-80 block mb-space-xs">Our Neighborhood Haven</span>
+<p class="text-headline-sm font-headline-sm">Siddhi Towers, Dapodi, Pune</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Info Grid -->
+<section class="w-full bg-surface-container-low py-space-xl px-gutter">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+<div class="lg:col-span-7 flex flex-col gap-space-xl">
+<!-- Address Card -->
+<div class="bg-surface p-space-xl rounded-2xl shadow-[0_4px_20px_rgba(62,39,35,0.06)] flex flex-col gap-space-lg">
+<h2 class="text-headline-md font-headline-md text-primary">Location &amp; Hours</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-lg">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">location_on</span>
+</div>
+<div>
+<h3 class="text-label-md font-label-md text-primary mb-space-xs">Address</h3>
+<p class="text-body-md text-on-surface-variant">Shop no 10, Siddhi Towers, Ganesh Nagar, Dapodi, Pimpri-Chinchwad, Maharashtra 411012</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">call</span>
+</div>
+<div>
+<h3 class="text-label-md font-label-md text-primary mb-space-xs">Direct Line</h3>
+<p class="text-body-md text-on-surface-variant font-medium">098903 74040</p>
+<a class="text-body-sm text-secondary hover:underline inline-block mt-1" href="tel:09890374040">Tap to call cafe</a>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+<div>
+<h3 class="text-label-md font-label-md text-primary mb-space-xs">Operating Hours</h3>
+<p class="text-body-md text-on-surface-variant">Monday – Sunday</p>
+<p class="text-body-md text-primary font-medium">8:00 AM – 11:00 PM</p>
+</div>
+</div>
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[20px]">local_parking</span>
+</div>
+<div>
+<h3 class="text-label-md font-label-md text-primary mb-space-xs">Amenities</h3>
+<p class="text-body-md text-on-surface-variant">Free Wi-Fi, AC Seating, Two-wheeler &amp; Car Parking available</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Card -->
+<div class="bg-surface p-space-xl rounded-2xl shadow-[0_4px_20px_rgba(62,39,35,0.06)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between flex-wrap gap-space-md">
+<div>
+<h2 class="text-headline-md font-headline-md text-primary">Find Your Way</h2>
+<p class="text-body-md text-on-surface-variant">Easily accessible from Mumbai-Pune Highway via Dapodi.</p>
+</div>
+<a class="bg-primary text-on-primary px-space-md py-space-sm rounded-full text-label-md flex items-center gap-space-xs hover:bg-espresso transition-colors" href="https://maps.google.com/?q=Siddhi+Towers+Ganesh+Nagar+Dapodi+Pune" rel="noopener" target="_blank">
+<span class="material-symbols-outlined text-[18px]">directions</span>
+<span>Open in Google Maps</span>
+</a>
+</div>
+<div class="w-full h-80 bg-cover bg-center rounded-xl shadow-inner mt-space-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDk6sgaIRrpTERRyHGOnsLPq6ntxdPWhAdfju2PqGzbEJEKHwxSNHTgtFoiW6lKHIjaEu3Wqa1X4DCCWqkZoU7jEjypjnA-LcugR-JU_XBOwBosAs9f4EXJP4zgLlqXMt72nzppz3WTsP2Y2vg94taWWcQORhJQaDP3ta3-s1Hz5e_ozvN7gb8BfqJC0ZTNrh-ZdaBLPAKKY-GnarH_K3HXP3cXEL4vXxG4Jtivi7c5BYTSOv3PRG0HIA')"></div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="lg:col-span-5 flex flex-col gap-space-xl">
+<!-- Reservation Form -->
+<div class="bg-surface p-space-xl rounded-2xl shadow-[0_4px_20px_rgba(62,39,35,0.06)] flex flex-col gap-space-lg">
+<div>
+<span class="text-label-sm uppercase tracking-wider text-secondary block mb-space-xs">Table Booking</span>
+<h2 class="text-headline-md font-headline-md text-primary">Reserve a Table</h2>
+<p class="text-body-sm text-on-surface-variant">Planning a visit? Let us keep your favorite cozy nook ready.</p>
+</div>
+<form class="flex flex-col gap-space-md" onsubmit="event.preventDefault(); alert('Reservation inquiry submitted successfully! We will confirm via phone shortly.');">
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Your Name</label>
+<input class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Abhishek Sharma" required type="text">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Phone Number</label>
+<input class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="98765 43210" required type="tel">
+</div>
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Guests</label>
+<select class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors">
+<option>1 Person</option>
+<option selected>2 People</option>
+<option>4 People</option>
+<option>6+ Group</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Date</label>
+<input class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" required type="date">
+</div>
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Time Slot</label>
+<select class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors">
+<option>09:00 AM – 11:00 AM</option>
+<option>11:00 AM – 01:00 PM</option>
+<option>04:00 PM – 06:00 PM</option>
+<option selected>07:00 PM – 09:00 PM</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Special Requests or Occasion</label>
+<textarea class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Corner seat, quiet spot for work, birthday setup..." rows="2"></textarea>
+</div>
+<button class="w-full mt-space-xs py-space-md bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors shadow-md" type="submit">
+Request Reservation
+</button>
+</form>
+</div>
+<!-- Delivery Partners -->
+<div class="bg-surface p-space-xl rounded-2xl shadow-[0_4px_20px_rgba(62,39,35,0.06)] flex flex-col gap-space-md">
+<div>
+<span class="text-label-sm uppercase tracking-wider text-secondary block mb-space-xs">Craving at Home?</span>
+<h2 class="text-headline-sm font-headline-sm text-primary">Order Online</h2>
+<p class="text-body-sm text-on-surface-variant">Get freshly baked buns and steaming coffee delivered straight to your doorstep.</p>
+</div>
+<div class="grid grid-cols-3 gap-space-md mt-space-sm">
+<a class="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-low hover:bg-secondary-container/30 transition-all group border border-outline-variant/20" href="#">
+<div class="w-10 h-10 rounded-full bg-red-50 text-red-600 flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<span class="text-label-sm font-medium text-primary">Zomato</span>
+<span class="text-[10px] text-olive-accent font-medium mt-0.5">4.6 ★ Delivery</span>
+</a>
+<a class="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-low hover:bg-secondary-container/30 transition-all group border border-outline-variant/20" href="#">
+<div class="w-10 h-10 rounded-full bg-orange-50 text-orange-600 flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">moped</span>
+</div>
+<span class="text-label-sm font-medium text-primary">Swiggy</span>
+<span class="text-[10px] text-olive-accent font-medium mt-0.5">SuperFast</span>
+</a>
+<a class="flex flex-col items-center justify-center p-space-md rounded-xl bg-surface-container-low hover:bg-secondary-container/30 transition-all group border border-outline-variant/20" href="#">
+<div class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-space-xs group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-label-sm font-medium text-primary">Justdial</span>
+<span class="text-[10px] text-secondary font-medium mt-0.5">Listed</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Neighborhood Vibe -->
+<section class="w-full py-space-xl px-gutter max-w-7xl mx-auto text-center flex flex-col items-center">
+<span class="text-label-sm uppercase tracking-widest text-secondary mb-space-sm">Neighborhood Landmark</span>
+<h2 class="text-headline-lg font-headline-lg text-primary max-w-xl mb-space-md">Right around the corner in Ganesh Nagar</h2>
+<p class="text-body-lg text-on-surface-variant max-w-2xl mb-space-xl">Drop by after work, during your weekend stroll, or whenever you need a peaceful ambiance accompanied by artisanal coffee aromas and freshly toasted buns.</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-lg w-full">
+<div class="bg-surface-container p-space-lg rounded-xl text-left">
+<span class="material-symbols-outlined text-primary text-[28px] mb-space-sm">coffee</span>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-space-xs">Artisanal Brews</h3>
+<p class="text-body-sm text-on-surface-variant">Single-origin beans expertly roasted and brewed to perfection every single hour.</p>
+</div>
+<div class="bg-surface-container p-space-lg rounded-xl text-left">
+<span class="material-symbols-outlined text-primary text-[28px] mb-space-sm">bakery_dining</span>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-space-xs">Signature Buns</h3>
+<p class="text-body-sm text-on-surface-variant">Warm, fluffy, buttery buns stuffed with gourmet fillings made fresh daily.</p>
+</div>
+<div class="bg-surface-container p-space-lg rounded-xl text-left">
+<span class="material-symbols-outlined text-primary text-[28px] mb-space-sm">group</span>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-space-xs">Warm Hospitality</h3>
+<p class="text-body-sm text-on-surface-variant">A community-first space where every guest is welcomed like family.</p>
+</div>
+</div>
+</section>
+</div>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="w-full bg-surface-container-low py-space-xl">
+<div class="max-w-7xl mx-auto px-gutter grid grid-cols-1 md:grid-cols-3 gap-space-xl text-on-surface-variant text-body-md">
+<div>
+<h3 class="text-headline-sm text-primary mb-space-sm font-headline-sm">Abby's Cafe Bun &amp; Bean</h3>
+<p class="mb-space-md">Your warm neighborhood haven for freshly brewed coffee and artisanal buns in Dapodi, Pune.</p>
+<p class="text-body-sm">Phone: +91 98765 43210</p>
+</div>
+<div>
+<h3 class="text-headline-sm text-primary mb-space-sm font-headline-sm">Opening Hours</h3>
+<p class="mb-space-xs">Monday – Friday: 8:00 AM – 10:00 PM</p>
+<p class="mb-space-xs">Saturday – Sunday: 9:00 AM – 11:00 PM</p>
+</div>
+<div>
+<h3 class="text-headline-sm text-primary mb-space-sm font-headline-sm">Location</h3>
+<p class="mb-space-sm">Dapodi, Pune, Maharashtra 411012</p>
+<div class="flex gap-space-md mt-space-md">
+<a class="text-primary hover:text-secondary transition-colors" href="#">Instagram</a>
+<a class="text-primary hover:text-secondary transition-colors" href="#">Facebook</a>
+<a class="text-primary hover:text-secondary transition-colors" href="#">Zomato</a>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-gutter mt-space-xl pt-space-md border-t border-outline-variant/30 text-center text-body-sm text-on-surface-variant">© 2024 Abby's Cafe Bun &amp; Bean. All rights reserved.</div>
+</footer>
+
+<!-- ========== ORDER MODAL ========== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="orderModal">
+<div class="bg-surface rounded-xl p-space-xl max-w-md w-full mx-gutter shadow-xl transform scale-95 transition-transform duration-300" id="modalContent">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="text-headline-md font-headline-md text-primary">Add to Order</h3>
+<button class="text-on-surface-variant hover:text-primary" onclick="closeOrderModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="mb-space-lg">
+<p class="text-body-md text-on-surface-variant mb-space-xs">Selected Item:</p>
+<p class="text-headline-sm font-headline-sm text-primary font-semibold" id="modalItemName"></p>
+<p class="text-body-lg text-secondary font-medium mt-1" id="modalItemPrice"></p>
+</div>
+<div class="mb-space-lg">
+<label class="block text-label-md text-on-surface mb-space-xs">Quantity</label>
+<div class="flex items-center gap-space-md">
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-bold hover:bg-surface-container-high" onclick="adjustQty(-1)">-</button>
+<span class="text-headline-sm font-headline-sm text-primary w-8 text-center" id="modalQty">1</span>
+<button class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary font-bold hover:bg-surface-container-high" onclick="adjustQty(1)">+</button>
+</div>
+</div>
+<div class="flex gap-space-md">
+<button class="flex-1 py-3 rounded-full border border-outline text-primary text-label-md hover:bg-surface-container transition-colors" onclick="closeOrderModal()">Cancel</button>
+<button class="flex-1 py-3 rounded-full bg-primary text-on-primary text-label-md hover:bg-espresso transition-colors" onclick="confirmOrder()">Confirm Order</button>
+</div>
+</div>
+</div>
+
+<!-- ========== AUTH MODAL ========== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="authModal">
+<div class="bg-surface rounded-xl p-space-xl max-w-sm w-full mx-gutter shadow-xl transform scale-95 transition-transform duration-300 relative" id="authModalContent">
+<button class="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors" onclick="closeAuthModal()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+
+<!-- Login Form -->
+<div id="loginFormContainer">
+<h3 class="text-headline-md font-headline-md text-primary mb-1 text-center">Welcome Back</h3>
+<p class="text-body-sm text-on-surface-variant text-center mb-6">Sign in to your Abby's account</p>
+<form onsubmit="handleLogin(event)" class="flex flex-col gap-4">
+  <div>
+    <label class="block text-label-sm text-primary mb-1">Email</label>
+    <input id="loginEmail" type="email" required class="w-full px-4 py-2.5 bg-surface-container-low rounded-lg border border-outline-variant/50 focus:border-primary focus:outline-none transition-colors">
+  </div>
+  <div>
+    <label class="block text-label-sm text-primary mb-1">Password</label>
+    <input id="loginPassword" type="password" required class="w-full px-4 py-2.5 bg-surface-container-low rounded-lg border border-outline-variant/50 focus:border-primary focus:outline-none transition-colors">
+  </div>
+  <button type="submit" class="w-full py-3 mt-2 bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors">Sign In</button>
+</form>
+<p class="text-center text-body-sm mt-4 text-on-surface-variant">Don't have an account? <a class="text-olive-accent font-medium cursor-pointer hover:underline" onclick="switchAuthView('signup')">Sign Up</a></p>
+</div>
+
+<!-- Signup Form -->
+<div id="signupFormContainer" class="hidden">
+<h3 class="text-headline-md font-headline-md text-primary mb-1 text-center">Create Account</h3>
+<p class="text-body-sm text-on-surface-variant text-center mb-6">Join Abby's Cafe for easy ordering</p>
+<form onsubmit="handleSignUp(event)" class="flex flex-col gap-4">
+  <div>
+    <label class="block text-label-sm text-primary mb-1">Full Name</label>
+    <input id="signupName" type="text" required class="w-full px-4 py-2.5 bg-surface-container-low rounded-lg border border-outline-variant/50 focus:border-primary focus:outline-none transition-colors">
+  </div>
+  <div>
+    <label class="block text-label-sm text-primary mb-1">Email</label>
+    <input id="signupEmail" type="email" required class="w-full px-4 py-2.5 bg-surface-container-low rounded-lg border border-outline-variant/50 focus:border-primary focus:outline-none transition-colors">
+  </div>
+  <div>
+    <label class="block text-label-sm text-primary mb-1">Password</label>
+    <input id="signupPassword" type="password" required minlength="6" class="w-full px-4 py-2.5 bg-surface-container-low rounded-lg border border-outline-variant/50 focus:border-primary focus:outline-none transition-colors">
+  </div>
+  <button type="submit" class="w-full py-3 mt-2 bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors">Create Account</button>
+</form>
+<p class="text-center text-body-sm mt-4 text-on-surface-variant">Already have an account? <a class="text-olive-accent font-medium cursor-pointer hover:underline" onclick="switchAuthView('login')">Sign In</a></p>
+</div>
+
+<!-- Signup Success State -->
+<div id="signupSuccessContainer" class="hidden flex-col items-center justify-center text-center py-4">
+<div class="w-16 h-16 rounded-full bg-green-100 text-green-600 flex items-center justify-center mb-4 mx-auto">
+  <span class="material-symbols-outlined text-[32px]">mark_email_read</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-primary mb-2">Check Your Inbox!</h3>
+<p class="text-body-md text-on-surface-variant mb-6">We've sent a confirmation link to your email address. Please click it to verify your account and then you can log in.</p>
+<button class="w-full py-3 bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors" onclick="switchAuthView('login')">Back to Login</button>
+</div>
+
+</div>
+</div>
+
+<!-- ========== MY ORDERS MODAL ========== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-primary/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" id="ordersModal">
+<div class="bg-surface rounded-xl max-w-lg w-full mx-gutter shadow-xl transform scale-95 transition-transform duration-300 relative max-h-[85vh] flex flex-col overflow-hidden" id="ordersModalContent">
+  <div class="flex items-center justify-between p-6 border-b border-outline-variant/20">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-primary text-[24px]">receipt_long</span>
+      <h3 class="text-headline-md font-headline-md text-primary">My Orders</h3>
+    </div>
+    <button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors" onclick="closeMyOrders()">
+      <span class="material-symbols-outlined text-[20px]">close</span>
+    </button>
+  </div>
+  <div id="ordersListContainer" class="flex-grow overflow-y-auto p-6">
+    <div class="flex flex-col items-center justify-center py-8 text-center">
+      <span class="material-symbols-outlined text-outline text-[48px] mb-4">hourglass_empty</span>
+      <p class="text-body-md text-on-surface-variant">Loading orders...</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script src="/js/main.js"></script>
+
+</body>
+</html>

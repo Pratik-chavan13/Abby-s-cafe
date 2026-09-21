@@ -1,3 +1,13 @@
+// ==========================================
+//           AUTHENTICATION SYSTEM
+// ==========================================
+
+const supabaseUrl = 'https://xsipacivhrjdjardaqfn.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzaXBhY2l2aHJqZGphcmRhcWZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5ODQ5MzcsImV4cCI6MjEwNTU2MDkzN30.mtB4ODKlmmVZwdFZVofUqt4Yn0BwJuWDuX9VWKv28aQ';
+const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+let currentUser = null;
+
 // ---- Navigation System ----
 let currentPage = 'home';
 
@@ -113,33 +123,31 @@ function confirmOrder() {
     return;
   }
 
-  // Parse price (e.g. '₹240' -> 240)
+  // Calculate total
   const priceNum = parseInt(currentPrice.replace(/[^0-9]/g, ''));
   const total = priceNum * currentQty;
 
   const orderData = {
     customer_name: name,
     customer_phone: phone,
+    customer_email: currentUser ? currentUser.email : null,
     items: [{
       name: currentItem,
       price: priceNum,
       quantity: currentQty
     }],
     total: total,
-    notes: notes
+    notes: notes,
+    status: 'pending'
   };
 
-  fetch('/api/orders', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(orderData)
-  })
-  .then(res => res.json())
-  .then(data => {
+  supabaseClient.from('orders').insert([orderData])
+  .then(({ error }) => {
+    if (error) throw error;
     alert('Order placed successfully! We will prepare it shortly.');
     closeOrderModal();
     // clear inputs
-    document.getElementById('nameInput').value = '';
+    document.getElementById('nameInput').value = currentUser ? currentUser.user_metadata?.full_name || '' : '';
     document.getElementById('phoneInput').value = '';
     document.getElementById('notesInput').value = '';
   })
@@ -149,16 +157,26 @@ function confirmOrder() {
   });
 }
 
-// ---- Fetch Menu Data from Backend ----
+// ---- Fetch Menu Data from Supabase ----
 async function fetchMenu() {
   try {
-    const res = await fetch('/api/menu');
-    const categories = await res.json();
+    const { data: categories, error: catError } = await supabaseClient.from('categories').select('*').order('sort_order', { ascending: true });
+    const { data: items, error: itemError } = await supabaseClient.from('menu_items').select('*').eq('is_available', true);
+    
+    if (catError) throw catError;
+    if (itemError) throw itemError;
+
+    // Group items by category
+    const categoriesWithItems = categories.map(cat => ({
+      ...cat,
+      items: items.filter(item => item.category_id === cat.id)
+    }));
+
     
     const container = document.getElementById('menu-container');
     container.innerHTML = ''; // clear loading spinner
     
-    categories.forEach(category => {
+    categoriesWithItems.forEach(category => {
       // Only render category if it has items
       if (!category.items || category.items.length === 0) return;
       
@@ -233,15 +251,7 @@ window.addEventListener('popstate', () => {
   }
 });
 
-// ==========================================
-//           AUTHENTICATION SYSTEM
-// ==========================================
-
-const supabaseUrl = 'https://xsipacivhrjdjardaqfn.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhzaXBhY2l2aHJqZGphcmRhcWZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5ODQ5MzcsImV4cCI6MjEwNTU2MDkzN30.mtB4ODKlmmVZwdFZVofUqt4Yn0BwJuWDuX9VWKv28aQ';
-const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-let currentUser = null;
+});
 
 async function checkSession() {
   const { data: { session } } = await supabaseClient.auth.getSession();

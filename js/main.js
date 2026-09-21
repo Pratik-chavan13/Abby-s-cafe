@@ -251,8 +251,6 @@ window.addEventListener('popstate', () => {
   }
 });
 
-});
-
 async function checkSession() {
   const { data: { session } } = await supabaseClient.auth.getSession();
   updateAuthUI(session?.user || null);

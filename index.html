@@ -705,34 +705,29 @@ Come experience the aroma of freshly ground beans and warm buns for yourself. Wh
 <h2 class="text-headline-md font-headline-md text-primary">Reserve a Table</h2>
 <p class="text-body-sm text-on-surface-variant">Planning a visit? Let us keep your favorite cozy nook ready.</p>
 </div>
-<form class="flex flex-col gap-space-md" onsubmit="event.preventDefault(); alert('Reservation inquiry submitted successfully! We will confirm via phone shortly.');">
+<form id="reservationForm" class="flex flex-col gap-space-md" onsubmit="handleReservationSubmit(event)">
 <div>
 <label class="block text-label-sm text-primary mb-space-xs">Your Name</label>
-<input class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Abhishek Sharma" required type="text">
+<input id="resName" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Abhishek Sharma" required type="text">
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div>
-<label class="block text-label-sm text-primary mb-space-xs">Phone Number</label>
-<input class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="98765 43210" required type="tel">
+<label class="block text-label-sm text-primary mb-space-xs">Email Address</label>
+<input id="resEmail" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="abhishek@example.com" required type="email">
 </div>
 <div>
-<label class="block text-label-sm text-primary mb-space-xs">Guests</label>
-<select class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors">
-<option>1 Person</option>
-<option selected>2 People</option>
-<option>4 People</option>
-<option>6+ Group</option>
-</select>
+<label class="block text-label-sm text-primary mb-space-xs">Phone Number</label>
+<input id="resPhone" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="98765 43210" required type="tel">
 </div>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div>
 <label class="block text-label-sm text-primary mb-space-xs">Date</label>
-<input class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" required type="date">
+<input id="resDate" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" required type="date">
 </div>
 <div>
 <label class="block text-label-sm text-primary mb-space-xs">Time Slot</label>
-<select class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors">
+<select id="resTime" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors">
 <option>09:00 AM – 11:00 AM</option>
 <option>11:00 AM – 01:00 PM</option>
 <option>04:00 PM – 06:00 PM</option>
@@ -740,12 +735,23 @@ Come experience the aroma of freshly ground beans and warm buns for yourself. Wh
 </select>
 </div>
 </div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
 <div>
-<label class="block text-label-sm text-primary mb-space-xs">Special Requests or Occasion</label>
-<textarea class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Corner seat, quiet spot for work, birthday setup..." rows="2"></textarea>
+<label class="block text-label-sm text-primary mb-space-xs">Guests</label>
+<select id="resGuests" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors">
+<option>1 Person</option>
+<option selected>2 People</option>
+<option>4 People</option>
+<option>6+ Group</option>
+</select>
 </div>
-<button class="w-full mt-space-xs py-space-md bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors shadow-md" type="submit">
-Request Reservation
+<div>
+<label class="block text-label-sm text-primary mb-space-xs">Special Requests</label>
+<textarea id="resRequests" class="w-full px-space-md py-space-sm bg-surface-container-low rounded-lg border border-warm-wood/40 text-on-surface focus:outline-none focus:border-primary transition-colors" placeholder="Corner seat..." rows="1"></textarea>
+</div>
+</div>
+<button id="resSubmitBtn" class="w-full mt-space-xs py-space-md bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors shadow-md flex justify-center items-center gap-2" type="submit">
+<span>Request Reservation</span>
 </button>
 </form>
 </div>

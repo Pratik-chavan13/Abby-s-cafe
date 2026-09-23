@@ -565,3 +565,51 @@ function switchAccount() {
     openAuthModal('login');
   });
 }
+
+// ==========================================
+//          RESERVATION SYSTEM
+// ==========================================
+
+async function handleReservationSubmit(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('resSubmitBtn');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">progress_activity</span><span>Processing...</span>';
+  
+  const reservationData = {
+    name: document.getElementById('resName').value.trim(),
+    email: document.getElementById('resEmail').value.trim(),
+    phone: document.getElementById('resPhone').value.trim(),
+    date: document.getElementById('resDate').value,
+    time: document.getElementById('resTime').value,
+    guests: document.getElementById('resGuests').value,
+    requests: document.getElementById('resRequests').value.trim()
+  };
+
+  try {
+    const response = await fetch('/api/book-table', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reservationData)
+    });
+    
+    const result = await response.json();
+    
+    if (response.ok) {
+      alert('Reservation successful! ' + result.message);
+      document.getElementById('reservationForm').reset();
+    } else {
+      alert('Error: ' + (result.error || 'Failed to submit reservation.'));
+    }
+  } catch (error) {
+    console.error('Error submitting reservation:', error);
+    alert('An unexpected error occurred. Please try again.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
+}

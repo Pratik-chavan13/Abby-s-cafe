@@ -181,7 +181,7 @@ async function fetchMenu() {
       if (!category.items || category.items.length === 0) return;
       
       let itemsHtml = category.items.map((item, index) => `
-        <div data-aos="fade-up" data-aos-delay="${index * 100}" class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1">
+        <div class="bg-surface-container-low rounded-xl p-space-lg shadow-sm flex flex-col justify-between transition-transform duration-300 hover:-translate-y-1" style="animation: fadeInUp 0.6s ease forwards ${index * 0.1}s; opacity: 0;">
           <div>
             <div class="relative h-48 rounded-lg overflow-hidden mb-space-md bg-surface-container-high">
               <div class="bg-cover bg-center w-full h-full" style="background-image: url('${item.image_url}')"></div>
@@ -230,11 +230,29 @@ async function fetchMenu() {
 
 // ---- Handle URL Hash on Load ----
 window.addEventListener('DOMContentLoaded', () => {
-  // Add AOS attributes to static sections automatically
-  document.querySelectorAll('section > div > div, .page-section > section > div').forEach((el, index) => {
-    if (!el.hasAttribute('data-aos') && !el.classList.contains('absolute')) {
+  // Add AOS attributes to specific static elements only (avoid containers that hold dynamic content)
+  const aosTargets = [
+    '#page-home .grid.grid-cols-1.md\\:grid-cols-3 > div',  // Featured specialty cards
+    '#page-home .grid.grid-cols-2 > div',                    // Ambiance image columns
+    '#page-about .grid.grid-cols-1 > div',                   // About page cards
+    '#page-about blockquote',                                 // About page quote
+    '#page-contact-and-location .grid > div',                 // Contact cards
+  ];
+  aosTargets.forEach(selector => {
+    document.querySelectorAll(selector).forEach((el, index) => {
+      if (!el.hasAttribute('data-aos') && !el.classList.contains('absolute')) {
+        el.setAttribute('data-aos', 'fade-up');
+        el.setAttribute('data-aos-delay', `${index * 100}`);
+        el.setAttribute('data-aos-duration', '800');
+      }
+    });
+  });
+
+  // Animate section headings
+  document.querySelectorAll('section h2, section h1').forEach(el => {
+    if (!el.hasAttribute('data-aos')) {
       el.setAttribute('data-aos', 'fade-up');
-      el.setAttribute('data-aos-duration', '800');
+      el.setAttribute('data-aos-duration', '600');
     }
   });
 

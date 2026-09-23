@@ -952,6 +952,73 @@ Come experience the aroma of freshly ground beans and warm buns for yourself. Wh
 </div>
 </div>
 
+<!-- ========== RESERVATION CONFIRMATION MODAL ========== -->
+<div class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-primary/50 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500" id="reservationConfirmModal">
+  <div class="bg-surface w-full sm:max-w-md sm:mx-4 sm:rounded-2xl rounded-t-3xl shadow-2xl transform translate-y-8 sm:translate-y-0 sm:scale-95 transition-all duration-500" id="reservationConfirmContent">
+    <!-- Top green banner -->
+    <div class="relative bg-gradient-to-br from-olive-accent to-[#4CAF50] rounded-t-3xl sm:rounded-t-2xl p-6 overflow-hidden">
+      <div class="absolute -right-6 -top-6 w-32 h-32 bg-white/10 rounded-full"></div>
+      <div class="absolute right-8 bottom-2 w-16 h-16 bg-white/10 rounded-full"></div>
+      <!-- Checkmark animation -->
+      <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-3 relative z-10">
+        <span class="material-symbols-outlined text-white text-[32px]" style="font-variation-settings:'FILL' 1;">check_circle</span>
+      </div>
+      <h3 class="text-xl font-semibold text-white relative z-10">Table Reserved!</h3>
+      <p class="text-white/80 text-sm mt-1 relative z-10">A confirmation email is on its way to you.</p>
+    </div>
+    <!-- Booking details -->
+    <div class="p-6">
+      <p class="text-label-sm uppercase tracking-wider text-secondary mb-3">Booking Summary</p>
+      <div class="flex flex-col gap-3 mb-6">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-[16px]">person</span>
+          </div>
+          <div>
+            <p class="text-body-sm text-on-surface-variant">Name</p>
+            <p class="text-label-md text-primary font-medium" id="confirmName">—</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-[16px]">calendar_month</span>
+          </div>
+          <div>
+            <p class="text-body-sm text-on-surface-variant">Date & Time</p>
+            <p class="text-label-md text-primary font-medium" id="confirmDateTime">—</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-[16px]">group</span>
+          </div>
+          <div>
+            <p class="text-body-sm text-on-surface-variant">Guests</p>
+            <p class="text-label-md text-primary font-medium" id="confirmGuests">—</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-primary text-[16px]">mail</span>
+          </div>
+          <div>
+            <p class="text-body-sm text-on-surface-variant">Confirmation sent to</p>
+            <p class="text-label-md text-primary font-medium" id="confirmEmail">—</p>
+          </div>
+        </div>
+      </div>
+      <!-- Note -->
+      <div class="bg-secondary-container/30 rounded-xl px-4 py-3 mb-5 flex items-start gap-2">
+        <span class="material-symbols-outlined text-secondary text-[18px] mt-0.5 shrink-0">info</span>
+        <p class="text-body-sm text-on-surface-variant">We will call you on <span class="font-medium text-primary" id="confirmPhone">—</span> to confirm your reservation shortly.</p>
+      </div>
+      <button onclick="closeReservationConfirm()" class="w-full py-3 bg-primary text-on-primary rounded-full text-label-md font-medium hover:bg-espresso transition-colors shadow-md">
+        Done
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- ========== JAVASCRIPT ========== -->
 <script src="js/main.js"></script>
 

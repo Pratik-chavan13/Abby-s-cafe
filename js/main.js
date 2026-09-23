@@ -600,7 +600,8 @@ async function handleReservationSubmit(e) {
     const result = await response.json();
     
     if (response.ok) {
-      alert('Reservation successful! ' + result.message);
+      // Show beautiful confirmation modal
+      openReservationConfirm(reservationData);
       document.getElementById('reservationForm').reset();
     } else {
       alert('Error: ' + (result.error || 'Failed to submit reservation.'));
@@ -612,4 +613,36 @@ async function handleReservationSubmit(e) {
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalText;
   }
+}
+
+function openReservationConfirm(data) {
+  // Fill in details
+  document.getElementById('confirmName').textContent = data.name;
+  document.getElementById('confirmEmail').textContent = data.email;
+  document.getElementById('confirmPhone').textContent = data.phone;
+  document.getElementById('confirmGuests').textContent = data.guests;
+
+  // Format date nicely
+  const dateObj = new Date(data.date);
+  const formattedDate = dateObj.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('confirmDateTime').textContent = `${formattedDate} · ${data.time}`;
+
+  // Show modal
+  const modal = document.getElementById('reservationConfirmModal');
+  const content = document.getElementById('reservationConfirmContent');
+  modal.classList.remove('opacity-0', 'pointer-events-none');
+  content.classList.remove('translate-y-8', 'sm:scale-95');
+  content.classList.add('translate-y-0', 'sm:scale-100');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReservationConfirm() {
+  const modal = document.getElementById('reservationConfirmModal');
+  const content = document.getElementById('reservationConfirmContent');
+  content.classList.add('translate-y-8', 'sm:scale-95');
+  content.classList.remove('translate-y-0', 'sm:scale-100');
+  setTimeout(() => {
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }, 300);
 }
